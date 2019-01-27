@@ -6,7 +6,9 @@ var config={
 	password:'password',
 	server:'127.0.0.1',	
 	port: 3306,
-	database:'industry'
+	database:'industry',
+	    dateStrings: true
+
 };
 
 

@@ -13,14 +13,13 @@ var value=req.body.brand;
 var type=req.body.typed;
 var sku_size=req.body.skusize;
 var vendor_name=req.body.vendor_name;
-var pastpurchase=req.body.past_purchase;
-var lastpurchaseunit=req.body.lastpurchaseunit;
+
 var minimum_qty=req.body.minimum_qty;
 
 console.log(minimum_qty);
 
 
-connection.query('INSERT INTO brand(Generic_Name,Brand,type,skusize,vendorname,past_purchase,lastpurchaseunit,minimum_qty) VALUES (?,?,?,?,?,?,?,?)', [item,value,type,sku_size,vendor_name,pastpurchase,lastpurchaseunit,minimum_qty],function(err,result){
+connection.query('INSERT INTO brand(Generic_Name,Brand,type,skusize,vendorname,minimum_qty) VALUES (?,?,?,?,?,?)', [item,value,type,sku_size,vendor_name,minimum_qty],function(err,result){
 
 
 		if(err)

@@ -13,7 +13,7 @@ exports.viewnormaldata=function(req,res)
 	res.setHeader('Access-Control-Allow-Credentials', true);
 
 
-connection.query('select * from brand join data on brand.Sno=data.Sno where data.date>=? and data.date<=?',[startdate,enddate],function(err,result){
+connection.query('select * from brand join data using(Sno) where data.date>=? and data.date<=?',[startdate,enddate],function(err,result){
 
 
 		if(err)
@@ -43,7 +43,7 @@ exports.viewproddata=function(req,res)
 var startdate=req.body.startdate;
 	var enddate=req.body.enddate;
 
-connection.query('select * from brand join proddata on brand.Sno=proddata.Sno where proddata.date>=? and proddata.date<=?',[startdate,enddate],function(err,result){
+connection.query('select * from brand join proddata using(Sno) where proddata.date>=? and proddata.date<=?',[startdate,enddate],function(err,result){
 
 
 		if(err)
@@ -54,13 +54,28 @@ connection.query('select * from brand join proddata on brand.Sno=proddata.Sno wh
 res.send(JSON.stringify(result));
 }
 }) 
-          
+}
+
+exports.viewpurchasedata=function(req,res)
+{
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+var startdate=req.body.startdate;
+	var enddate=req.body.enddate;
+
+connection.query('select * from brand join purchasedata using(Sno) where purchasedata.date>=? and purchasedata.date<=?',[startdate,enddate],function(err,result){
 
 
-
-
-
-
+		if(err)
+			console.log(err)
+		else
+		{
+			console.log(result)
+res.send(JSON.stringify(result));
+}
+}) 
 }
 
 

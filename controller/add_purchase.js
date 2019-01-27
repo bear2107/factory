@@ -9,17 +9,11 @@ exports.add=function(req,res)
 	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 
-var datac=req.body.datac
-var obj=JSON.parse(datac);
+var purchasedate=req.body.purchasedate
+var purchaseval=req.body.purchaseval
+var sno=req.body.sno
 
-
-var arr=[]
-for(var key in obj){
-	arr.push(obj[key]);
-
-}
-
-connection.query('INSERT INTO proddata(Sno,issued,date) VALUES ? on DUPLICATE KEY UPDATE Sno=VALUES(Sno),issued=VALUES(issued),date=VALUES(date)', [arr],function(err,result){
+connection.query('INSERT INTO purchasedata(Sno,date,val) VALUES (?,?,?)', [sno,purchasedate,purchaseval],function(err,result){
 
 
 		if(err)
@@ -49,13 +43,14 @@ res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 
 var query="";
-var sno=req.body.sno;
-var data=req.body.date;
-var val=req.body.val;
+var purchasedate=req.body.purchasedate
+var purchaseval=req.body.purchaseval
+var sno=req.body.sno
 
-query="UPDATE proddata SET issued=? where date=? and Sno=?";
 
-connection.query(query,[val,data,sno],function(err,result){
+query="UPDATE purchasedata SET date=? ,val =? where  Sno=?";
+
+connection.query(query,[purchasedate,purchaseval,sno],function(err,result){
 	if(err)
 		console.log(err)
 	else

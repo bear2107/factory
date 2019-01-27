@@ -19,7 +19,7 @@ for(var key in obj){
 
 }
 
-connection.query('INSERT INTO data(Sno,issued,received,date) VALUES ?', [arr],function(err,result){
+connection.query('INSERT INTO data(Sno,issued,received,date) VALUES ? on DUPLICATE KEY UPDATE Sno=VALUES(Sno),issued=VALUES(issued),received=VALUES(received),date=VALUES(date) ',[arr],function(err,result){
 
 
 		if(err)
